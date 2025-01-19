@@ -34,27 +34,21 @@ char* convert_int16_to_str(int16_t i) {
 
 void initializeSensor()
 {
-  //
-  // Perfrom full reset as per MPU-6000/MPU-6050 Register Map and Descriptions, Section 4.28, pages 40 to 41.
-  //
-
-  // performing full device reset, disables temperature sensor, disables SLEEP mode
-  Wire.beginTransmission(0x68);  // Device address.
-  Wire.write(0x6B);              // PWR_MGMT_1 register.
-  Wire.write(0b10001000);        // DEVICE_RESET, TEMP_DIS.
+  Wire.beginTransmission(0x68); 
+  Wire.write(0x6B);           
+  Wire.write(0b10001000);        
   Wire.endTransmission();
-  delay(100);                    // Wait for reset to complete.
+  delay(100);                 
 
-  Wire.beginTransmission(0x68);  // Device address.
-  Wire.write(0x68);              // SIGNAL_PATH_RESET register.
-  Wire.write(0b00000111);        // GYRO_RESET, ACCEL_RESET, TEMP_RESET.
+  Wire.beginTransmission(0x68); 
+  Wire.write(0x68);            
+  Wire.write(0b00000111);       
   Wire.endTransmission();
-  delay(100);                    // Wait for reset to complete.
+  delay(100);                  
 
-  // Disable SLEEP mode because the reset re-enables it. Section 3, PWR_MGMT_1 register, page 8.
-  Wire.beginTransmission(MPUAddress);   // Device address.
-  Wire.write(0x6B);                     // PWR_MGMT_1 register.
-  Wire.write(0b00001000);               // SLEEP = 0, TEMP_DIS = 1.
+  Wire.beginTransmission(MPUAddress);  
+  Wire.write(0x6B);                     
+  Wire.write(0b00001000);               
   Wire.endTransmission();
 }
 
