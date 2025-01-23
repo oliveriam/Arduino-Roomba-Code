@@ -272,6 +272,5 @@ void turnLeftFast() {
   digitalWrite(FRPin, HIGH);
   analogWrite(FRSpeedPin, 225);
   delay(400);
-  stop();
 }
 
